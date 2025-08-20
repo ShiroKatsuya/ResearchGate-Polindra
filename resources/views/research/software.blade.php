@@ -211,12 +211,109 @@
     <!-- Enhanced Pagination -->
     @if(method_exists($software, 'withQueryString') && $software->hasPages())
     <div class="mt-12 pt-8 border-t border-gray-200/50">
-        <div class="flex items-center justify-between">
-            <div class="text-sm text-gray-600">
-                Menampilkan {{ $software->firstItem() ?? 0 }} - {{ $software->lastItem() ?? 0 }} dari {{ $software->total() }} aplikasi
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                <span>
+                    Menampilkan <span class="font-semibold text-gray-900">{{ $software->firstItem() ?? 0 }}</span>
+                    -
+                    <span class="font-semibold text-gray-900">{{ $software->lastItem() ?? 0 }}</span>
+                    dari
+                    <span class="font-semibold text-gray-900">{{ $software->total() }}</span>
+                    Perangkat Lunak
+                </span>
             </div>
-            <div class="flex items-center gap-2">
-                {{ $software->withQueryString()->links() }}
+            <div class="flex items-center space-x-1">
+                @if($software->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </span>
+                @else
+                <a href="{{ $software->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </a>
+                @endif
+
+                <div class="flex items-center space-x-1">
+                    @foreach($software->getUrlRange(1, $software->lastPage()) as $page => $url)
+                        @if($page == $software->currentPage())
+                        <span class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-black bg-white shadow border border-gray-300 rounded-lg">
+                            {{ $page }}
+                        </span>
+                        @elseif($page == 1 || $page == $software->lastPage() || ($page >= $software->currentPage() - 1 && $page <= $software->currentPage() + 1))
+                        <a href="{{ $url }}" 
+                           class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-black bg-white shadow border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-black transition-all duration-200">
+                            {{ $page }}
+                        </a>
+                        @elseif($page == $software->currentPage() - 2 || $page == $software->currentPage() + 2)
+                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-400">
+                            ...
+                        </span>
+                        @endif
+                    @endforeach
+                </div>
+
+                @if($software->hasMorePages())
+                <a href="{{ $software->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
+            </div>
+
+            <div class="flex md:hidden items-center space-x-2">
+                @if($software->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </span>
+                @else
+                <a href="{{ $software->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                @endif
+                
+                <span class="text-sm text-gray-600">
+                    Halaman {{ $software->currentPage() }} dari {{ $software->lastPage() }}
+                </span>
+                
+                @if($software->hasMorePages())
+                <a href="{{ $software->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
             </div>
         </div>
     </div>

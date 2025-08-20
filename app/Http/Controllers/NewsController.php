@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
+use App\Models\Berita;
 
 class NewsController extends Controller
 {
@@ -13,7 +14,7 @@ class NewsController extends Controller
         $categorySlug = $request->string('kategori')->toString();
         $search = $request->string('q')->toString();
 
-        $query = News::with('category')
+        $query = Berita::with('category')
             ->when($categorySlug, function ($q, $slug) {
                 $q->whereHas('category', fn($cq) => $cq->where('slug', $slug));
             })
@@ -24,7 +25,7 @@ class NewsController extends Controller
             ->latest('published_at');
 
         $news = $query->paginate(8)->withQueryString();
-        $categories = NewsCategory::orderBy('name')->get();
+        $categories = Berita::orderBy('title')->get();
 
         return view('news.index', [
             'title' => 'Berita & Acara Internal Polindra',
@@ -35,7 +36,7 @@ class NewsController extends Controller
         ]);
     }
 
-    public function show(News $news)
+    public function show(Berita $news)
     {
         return view('news.show', [
             'title' => $news->title,

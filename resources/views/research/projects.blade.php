@@ -184,7 +184,7 @@
                             <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
                             </svg>
-                            <span>Mulai: {{ $project->start_date->format('d M Y') }}</span>
+                            <span>Mulai: {{ \Carbon\Carbon::parse($project->start_date)->format('d M Y') }}</span>
                         </div>
                         @endif
                         
@@ -279,12 +279,109 @@
     <!-- Enhanced Pagination -->
     @if(method_exists($projects, 'withQueryString') && $projects->hasPages())
     <div class="mt-12 pt-8 border-t border-gray-200/50">
-        <div class="flex items-center justify-between">
-            <div class="text-sm text-gray-600">
-                Menampilkan {{ $projects->firstItem() ?? 0 }} - {{ $projects->lastItem() ?? 0 }} dari {{ $projects->total() }} proyek
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                <span>
+                    Menampilkan <span class="font-semibold text-gray-900">{{ $projects->firstItem() ?? 0 }}</span>
+                    -
+                    <span class="font-semibold text-gray-900">{{ $projects->lastItem() ?? 0 }}</span>
+                    dari
+                    <span class="font-semibold text-gray-900">{{ $projects->total() }}</span>
+                    Proyek
+                </span>
             </div>
-            <div class="flex items-center gap-2">
-                {{ $projects->withQueryString()->links() }}
+            <div class="flex items-center space-x-1">
+                @if($projects->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </span>
+                @else
+                <a href="{{ $projects->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </a>
+                @endif
+
+                <div class="flex items-center space-x-1">
+                    @foreach($projects->getUrlRange(1, $projects->lastPage()) as $page => $url)
+                        @if($page == $projects->currentPage())
+                        <span class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-black bg-white shadow border border-gray-300 rounded-lg">
+                            {{ $page }}
+                        </span>
+                        @elseif($page == 1 || $page == $projects->lastPage() || ($page >= $projects->currentPage() - 1 && $page <= $projects->currentPage() + 1))
+                        <a href="{{ $url }}" 
+                           class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-black bg-white shadow border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-black transition-all duration-200">
+                            {{ $page }}
+                        </a>
+                        @elseif($page == $projects->currentPage() - 2 || $page == $projects->currentPage() + 2)
+                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-400">
+                            ...
+                        </span>
+                        @endif
+                    @endforeach
+                </div>
+
+                @if($projects->hasMorePages())
+                <a href="{{ $projects->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
+            </div>
+
+            <div class="flex md:hidden items-center space-x-2">
+                @if($projects->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </span>
+                @else
+                <a href="{{ $projects->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                @endif
+                
+                <span class="text-sm text-gray-600">
+                    Halaman {{ $projects->currentPage() }} dari {{ $projects->lastPage() }}
+                </span>
+                
+                @if($projects->hasMorePages())
+                <a href="{{ $projects->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
             </div>
         </div>
     </div>

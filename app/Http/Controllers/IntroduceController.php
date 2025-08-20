@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\Perkenalan;
 
 class IntroduceController extends Controller
 {
     public function index(Request $request)
     {
         $year = $request->integer('year');
-        $studentsQuery = Student::query()
+        $studentsQuery = Perkenalan::query()
             ->when($request->string('q')->toString(), function ($q, $term) {
                 $q->where('name', 'like', "%{$term}%")
                   ->orWhere('program_study', 'like', "%{$term}%");
@@ -19,7 +20,7 @@ class IntroduceController extends Controller
             ->orderBy('name');
 
         $students = $studentsQuery->paginate(12)->withQueryString();
-        $totalStudents = Student::count();
+        $totalStudents = Perkenalan::count();
 
         return view('introduce.index', [
             'title' => 'Perkenalan Mahasiswa & Alumni',

@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+    use Illuminate\Support\Str;
+@endphp
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/30">
     <!-- Hero Section -->
-  <div class="relative overflow-hidden bg-gradient-to-r from-gray-500 via-gray-600 to-gray-800 rounded-3xl mb-8">
+    <div class="relative overflow-hidden bg-gradient-to-r from-gray-500 via-gray-600 to-gray-800 rounded-3xl mb-8">
         <div class="absolute inset-0 bg-black/10"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         
@@ -21,16 +24,16 @@
                     </div>
                 </div>
                 
-            @if(method_exists($publications, 'total'))
-                <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-3 text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                    <span class="font-semibold">{{ number_format($publications->total()) }}</span>
-                    <span class="text-primary-100">publikasi tersedia</span>
-                </div>
-            @endif
-        </div>
+                @if(method_exists($publications, 'total'))
+                    <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-3 text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span class="font-semibold">{{ number_format($publications->total()) }}</span>
+                        <span class="text-primary-100">publikasi tersedia</span>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 
@@ -56,7 +59,7 @@
                         <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
                             <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
                         </div>
-        </div>
+                    </div>
                     
                     <div class="flex gap-3">
                         <button 
@@ -66,8 +69,8 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"/>
                             </svg>
-            Cari
-        </button>
+                            Cari
+                        </button>
                         
                         <button 
                             type="button" 
@@ -92,7 +95,7 @@
                     <a href="{{ route('research.publications') }}" class="text-primary-600 hover:text-primary-700 underline">Hapus filter</a>
                 </div>
                 @endif
-    </form>
+            </form>
         </div>
     </div>
 
@@ -126,13 +129,13 @@
                                 </div>
                                 @endif
                                 
-                            @if($pub->student)
-                                <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1.5 rounded-full">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-                                    </svg>
-                                    <span class="font-medium">{{ $pub->student->name }}</span>
-                                </div>
+                                @if($pub->student)
+                                    <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1.5 rounded-full">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                                        </svg>
+                                        <span class="font-medium">{{ $pub->student->name }}</span>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -143,18 +146,18 @@
                                 {{ $pub->published_at->format('Y') }}
                             </div>
                         </div>
-                            @endif
+                        @endif
                     </div>
 
                     <!-- Abstract -->
                     <div class="mb-6">
                         <p class="text-gray-700 leading-relaxed">{{ Str::limit($pub->abstract, 200) }}</p>
-                        @if(strlen($pub->abstract) > 200)
+                        @if(Str::length($pub->abstract) > 200)
                         <button class="mt-2 text-primary-600 hover:text-primary-700 font-medium text-sm hover:underline transition-colors duration-200">
                             Baca selengkapnya...
                         </button>
-                    @endif
-                </div>
+                        @endif
+                    </div>
 
                     <!-- Action Buttons -->
                     <div class="flex flex-wrap items-center gap-3">
@@ -182,12 +185,12 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                 </svg>
-                            Salin DOI
-                        </button>
+                                Salin DOI
+                            </button>
                         </div>
-                    @endif
+                        @endif
                         
-                    @if($pub->url)
+                        @if($pub->url)
                         <a 
                             href="{{ $pub->url }}" 
                             target="_blank" 
@@ -200,7 +203,7 @@
                             </svg>
                             Tautan
                         </a>
-                    @endif
+                        @endif
                         
                         <button 
                             type="button" 
@@ -242,12 +245,109 @@
     <!-- Enhanced Pagination -->
     @if(method_exists($publications, 'withQueryString') && $publications->hasPages())
     <div class="mt-12 pt-8 border-t border-gray-200/50">
-        <div class="flex items-center justify-between">
-            <div class="text-sm text-gray-600">
-                Menampilkan {{ $publications->firstItem() ?? 0 }} - {{ $publications->lastItem() ?? 0 }} dari {{ $publications->total() }} publikasi
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                <span>
+                    Menampilkan <span class="font-semibold text-gray-900">{{ $publications->firstItem() ?? 0 }}</span>
+                    -
+                    <span class="font-semibold text-gray-900">{{ $publications->lastItem() ?? 0 }}</span>
+                    dari
+                    <span class="font-semibold text-gray-900">{{ $publications->total() }}</span>
+                    publikasi
+                </span>
             </div>
-            <div class="flex items-center gap-2">
-                {{ $publications->withQueryString()->links() }}
+            <div class="flex items-center space-x-1">
+                @if($publications->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </span>
+                @else
+                <a href="{{ $publications->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </a>
+                @endif
+
+                <div class="flex items-center space-x-1">
+                    @foreach($publications->getUrlRange(1, $publications->lastPage()) as $page => $url)
+                        @if($page == $publications->currentPage())
+                        <span class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-black bg-white shadow border border-gray-300 rounded-lg">
+                            {{ $page }}
+                        </span>
+                        @elseif($page == 1 || $page == $publications->lastPage() || ($page >= $publications->currentPage() - 1 && $page <= $publications->currentPage() + 1))
+                        <a href="{{ $url }}" 
+                           class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-black bg-white shadow border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-black transition-all duration-200">
+                            {{ $page }}
+                        </a>
+                        @elseif($page == $publications->currentPage() - 2 || $page == $publications->currentPage() + 2)
+                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-400">
+                            ...
+                        </span>
+                        @endif
+                    @endforeach
+                </div>
+
+                @if($publications->hasMorePages())
+                <a href="{{ $publications->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
+            </div>
+
+            <div class="flex md:hidden items-center space-x-2">
+                @if($publications->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </span>
+                @else
+                <a href="{{ $publications->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                @endif
+                
+                <span class="text-sm text-gray-600">
+                    Halaman {{ $publications->currentPage() }} dari {{ $publications->lastPage() }}
+                </span>
+                
+                @if($publications->hasMorePages())
+                <a href="{{ $publications->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
             </div>
         </div>
     </div>
@@ -302,7 +402,7 @@
                             <h4 class="font-semibold text-gray-900 mb-2">Nama Jurnal</h4>
                             <p class="text-gray-600">Cari berdasarkan nama jurnal atau penerbit untuk menemukan publikasi dari sumber tertentu.</p>
                         </div>
-    </div>
+                    </div>
 
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
@@ -314,8 +414,8 @@
                             <h4 class="font-semibold text-gray-900 mb-2">Nama Penulis</h4>
                             <p class="text-gray-600">Cari berdasarkan nama mahasiswa penulis untuk melihat semua publikasi dari orang tertentu.</p>
                         </div>
-          </div>
-          </div>
+                    </div>
+                </div>
                 
                 <div class="bg-blue-50 rounded-2xl p-6">
                     <div class="flex items-start gap-3">
@@ -325,10 +425,10 @@
                         <div>
                             <h4 class="font-semibold text-blue-900 mb-1">Pro Tip</h4>
                             <p class="text-blue-800 text-sm">Gunakan tanda kutip untuk pencarian yang lebih tepat, misalnya "machine learning" akan mencari frasa lengkap tersebut.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Footer -->
             <div class="bg-gray-50 px-8 py-6 flex justify-end">
@@ -346,5 +446,3 @@
     </div>
 </div>
 @endsection
-
-

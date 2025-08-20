@@ -47,7 +47,7 @@
                             type="text" 
                             name="q" 
                             value="{{ $search }}" 
-                            placeholder="Cari nama, prodi, atau tahun lulus..." 
+                            placeholder="Cari nama, atau prodi" 
                             class="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all duration-200 hover:bg-white/70"
                             autocomplete="off"
                         />
@@ -239,14 +239,111 @@
     </div>
 
     <!-- Enhanced Pagination -->
-    @if($students->hasPages())
+    @if(method_exists($students, 'withQueryString') && $students->hasPages())
     <div class="mt-12 pt-8 border-t border-gray-200/50">
-        <div class="flex items-center justify-between">
-            <div class="text-sm text-gray-600">
-                Menampilkan {{ $students->firstItem() ?? 0 }} - {{ $students->lastItem() ?? 0 }} dari {{ $students->total() }} mahasiswa/alumni
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                <span>
+                    Menampilkan <span class="font-semibold text-gray-900">{{ $students->firstItem() ?? 0 }}</span>
+                    -
+                    <span class="font-semibold text-gray-900">{{ $students->lastItem() ?? 0 }}</span>
+                    dari
+                    <span class="font-semibold text-gray-900">{{ $students->total() }}</span>
+                    mahasiswa/alumni
+                </span>
             </div>
-            <div class="flex items-center gap-2">
-                {{ $students->withQueryString()->links() }}
+            <div class="flex items-center space-x-1">
+                @if($students->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </span>
+                @else
+                <a href="{{ $students->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Sebelumnya
+                </a>
+                @endif
+
+                <div class="flex items-center space-x-1">
+                    @foreach($students->getUrlRange(1, $students->lastPage()) as $page => $url)
+                        @if($page == $students->currentPage())
+                        <span class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-black bg-white shadow border border-gray-300 rounded-lg">
+                            {{ $page }}
+                        </span>
+                        @elseif($page == 1 || $page == $students->lastPage() || ($page >= $students->currentPage() - 1 && $page <= $students->currentPage() + 1))
+                        <a href="{{ $url }}" 
+                           class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-black bg-white shadow border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-black transition-all duration-200">
+                            {{ $page }}
+                        </a>
+                        @elseif($page == $students->currentPage() - 2 || $page == $students->currentPage() + 2)
+                        <span class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-400">
+                            ...
+                        </span>
+                        @endif
+                    @endforeach
+                </div>
+
+                @if($students->hasMorePages())
+                <a href="{{ $students->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-all duration-200">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    Berikutnya
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
+            </div>
+
+            <div class="flex md:hidden items-center space-x-2">
+                @if($students->onFirstPage())
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </span>
+                @else
+                <a href="{{ $students->previousPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                @endif
+                
+                <span class="text-sm text-gray-600">
+                    Halaman {{ $students->currentPage() }} dari {{ $students->lastPage() }}
+                </span>
+                
+                @if($students->hasMorePages())
+                <a href="{{ $students->nextPageUrl() }}" 
+                   class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                @else
+                <span class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+                @endif
             </div>
         </div>
     </div>
