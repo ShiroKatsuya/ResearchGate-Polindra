@@ -8,6 +8,11 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\LoginController;
 
 require_once 'publikasi.php';
+require_once 'proyek.php';
+require_once 'perangkat_lunak.php';
+require_once 'perkenalan.php';
+require_once 'berita.php';
+require_once 'student.php';
 
 Route::get('/', fn() => view('home', ['title' => 'Gerbang Riset Mahasiswa Politeknik Negeri Indramayu']))->name('home');
 
@@ -27,6 +32,12 @@ Route::get('/berita/{news:slug}', [NewsController::class, 'show'])->name('news.s
 // Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::get('/dashboard/content', [DashboardController::class, 'content'])->name('dashboard.content');
+
+// Simple demo logout to reset nav state
+Route::post('/logout', function() {
+    session()->forget('is_logged_in');
+    return redirect()->route('home');
+})->name('logout');
 
 // Login and Register
 Route::get('/register', [LoginController::class, 'index'])->name('register');

@@ -13,6 +13,8 @@ class DashboardController extends Controller
     }
     public function content()
     {
+        // Mark as logged-in for demo navigation state
+        session(['is_logged_in' => true]);
         return view('dashboard.content');
     }
 }

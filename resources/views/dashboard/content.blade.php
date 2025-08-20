@@ -1,7 +1,5 @@
-`
-@extends('layouts.app')
 
-@section('containerClass', 'max-w-none w-full')
+@extends('layouts.app')
 
 @section('content')
 <div 
@@ -66,9 +64,10 @@
                     <div>
                         <div class="flex items-center gap-3 mb-3">
                             <div class="bg-primary-100 text-primary-700 rounded-lg p-2">
+                                <!-- SVG: Publication/Research Paper Icon -->
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0H3m9-16a2 2 0 012 2v12a2 2 0 01-2 2" />
+                                    <rect x="4" y="3" width="16" height="18" rx="2" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h8M8 15h4" />
                                 </svg>
                             </div>
                             <h3 class="text-lg font-semibold text-gray-900">Publikasi Riset</h3>
@@ -76,7 +75,7 @@
                         <p class="text-gray-600 mb-4">Kelola dan unggah publikasi hasil riset mahasiswa dan dosen.</p>
                     </div>
                     <div class="flex justify-center">
-                        <a href="{{ route('research.publications') }}" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
+                        <a href="{{ route('publikasi.index') }}" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
                             <span class="text-black">Kelola Sekarang</span>
                             <svg class="h-4 w-4 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -99,7 +98,7 @@
                         <p class="text-gray-600 mb-4">Atur dan dokumentasikan proyek riset yang sedang berjalan maupun selesai.</p>
                     </div>
                     <div class="flex justify-center">
-                    <a href="{{ route('research.projects') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
+                    <a href="{{ route('proyek.index') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
                         <span class="text-black">Kelola Sekarang</span>
                         <svg class="h-4 w-4 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -122,7 +121,7 @@
                         <p class="text-gray-600 mb-4">Kelola aplikasi dan perangkat lunak hasil karya mahasiswa dan dosen.</p>
                     </div>
                     <div class="flex justify-center">
-                    <a href="{{ route('research.software') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
+                    <a href="{{ route('perangkatlunak.index') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
                         <span class="text-black flex items-center justify-center">Kelola Sekarang</span>
                         <svg class="h-4 w-4 text-black flex items-center justify-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -145,7 +144,7 @@
                         <p class="text-gray-600 mb-4">Perbarui informasi pengenalan jurusan, dosen, dan mahasiswa.</p>
                     </div>
                     <div class="flex justify-center">
-                    <a href="{{ route('introduce.index') }}" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
+                    <a href="{{ route('perkenalan.index') }}" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
                         <span class="text-black flex items-center justify-center w-full">Kelola Sekarang</span>
                         <svg class="h-4 w-4 text-black flex items-center justify-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -168,7 +167,33 @@
                         <p class="text-gray-600 mb-4">Kelola berita dan pengumuman terbaru seputar jurusan dan kampus.</p>
                     </div>
                     <div class="flex justify-center">
-                    <a href="{{ route('news.index') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
+                    <a href="{{ route('berita.index') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
+                        <span class="text-black flex items-center justify-center w-full">Kelola Sekarang </span>
+                        <svg class="h-4 w-4 text-black flex items-center justify-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    </div>
+                </div>
+
+                <!-- Card: Mahasiswa -->
+                <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between card-hover transition-all duration-200">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-primary-100 text-primary-700 rounded-lg p-2">
+                                <!-- Changed SVG to something more related to students: graduation cap -->
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 9l10 6 10-6-10-6z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-6" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 16.5V12.5l5 3 5-3v4" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900">Mahasiswa</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Kelola data mahasiswa jurusan dan kampus.</p>
+                    </div>
+                    <div class="flex justify-center">
+                    <a href="{{ route('student.index') }}" class="mt-2 flex justify-center items-center gap-2 px-4 py-2 rounded-lg bg-primary-600 text-white font-medium shadow hover:bg-primary-700 transition-all duration-200">
                         <span class="text-black flex items-center justify-center w-full">Kelola Sekarang </span>
                         <svg class="h-4 w-4 text-black flex items-center justify-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>

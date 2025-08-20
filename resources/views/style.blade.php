@@ -37,6 +37,17 @@
 </style>
 
 <style>
+    /* Modal helpers */
+    .modal-content-enter {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
+    .modal-open {
+        overflow: hidden;
+    }
+    #modalContent {
+        will-change: transform, opacity;
+    }
     @keyframes fade-in {
         from { opacity: 0; transform: translateY(-10px); }
         to { opacity: 1; transform: translateY(0); }
@@ -84,38 +95,89 @@
         const searchInput = document.getElementById('searchInput');
         const journalSelect = document.getElementById('journalSelect');
         const dateInput = document.getElementById('dateInput');
+        const statusSelect = document.getElementById('statusSelect');
+        const studentNameInput = document.getElementById('studentNameInput');
+        const yearInput = document.getElementById('yearInput');
+        const startDateInput = document.getElementById('startDateInput');
+        const endDateInput = document.getElementById('endDateInput');
         const searchForm = document.getElementById('searchForm');
         const searchSpinner = document.getElementById('searchSpinner');
         const searchBtn = document.getElementById('searchBtn');
         let searchTimeout;
-    
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            searchSpinner.classList.remove('hidden');
-            searchTimeout = setTimeout(() => {
+
+        if (searchInput && searchForm && searchSpinner) {
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchSpinner.classList.remove('hidden');
+                searchTimeout = setTimeout(() => {
+                    searchForm.submit();
+                }, 800);
+            });
+        }
+
+        if (journalSelect && searchForm) {
+            journalSelect.addEventListener('change', function() {
                 searchForm.submit();
-            }, 800);
-        });
-    
-        journalSelect.addEventListener('change', function() {
-            searchForm.submit();
-        });
-    
-        dateInput.addEventListener('change', function() {
-            searchForm.submit();
-        });
-    
-        searchForm.addEventListener('submit', function() {
-            searchBtn.disabled = true;
-            searchBtn.innerHTML = `
-                <svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Mencari...
-            `;
-            searchBtn.classList.add('opacity-75', 'cursor-not-allowed');
-        });
+            });
+        }
+
+        if (dateInput && searchForm) {
+            dateInput.addEventListener('change', function() {
+                searchForm.submit();
+            });
+        }
+
+        if (statusSelect && searchForm) {
+            statusSelect.addEventListener('change', function() {
+                searchForm.submit();
+            });
+        }
+
+        if (studentNameInput && searchForm) {
+            studentNameInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchSpinner && searchSpinner.classList.remove('hidden');
+                searchTimeout = setTimeout(() => {
+                    searchForm.submit();
+                }, 600);
+            });
+        }
+
+        if (yearInput && searchForm) {
+            yearInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchSpinner && searchSpinner.classList.remove('hidden');
+                searchTimeout = setTimeout(() => {
+                    searchForm.submit();
+                }, 400);
+            });
+        }
+
+        if (startDateInput && searchForm) {
+            startDateInput.addEventListener('change', function() {
+                searchForm.submit();
+            });
+        }
+
+        if (endDateInput && searchForm) {
+            endDateInput.addEventListener('change', function() {
+                searchForm.submit();
+            });
+        }
+
+        if (searchForm && searchBtn) {
+            searchForm.addEventListener('submit', function() {
+                searchBtn.disabled = true;
+                searchBtn.innerHTML = `
+                    <svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Mencari...
+                `;
+                searchBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            });
+        }
     });
     
     function openDeleteModal(id, title) {
@@ -123,7 +185,35 @@
         const modalContent = document.getElementById('modalContent');
         const deleteForm = document.getElementById('deleteForm');
         const deleteItemTitle = document.getElementById('deleteItemTitle');
-        deleteForm.action = `{{ route('publikasi.index') }}/${id}`;
+
+        // Determine current section and build correct destroy URL template
+        const isPerangkatLunak = @json(request()->routeIs('perangkatlunak.*'));
+        const isPerkenalan = @json(request()->routeIs('perkenalan.*'));
+        const isStudent = @json(request()->routeIs('student.*'));
+        const isProyek = @json(request()->routeIs('proyek.*'));
+        const isPublikasi = @json(request()->routeIs('publikasi.*'));
+        const isBerita = @json(request()->routeIs('berita.*'));
+
+        const perangkatLunakDestroyTemplate = @json(route('perangkatlunak.destroy', ['id' => 'ID_PLACEHOLDER']));
+        const perkenalanDestroyTemplate = @json(route('perkenalan.destroy', ['id' => 'ID_PLACEHOLDER']));
+        const proyekDestroyTemplate = @json(route('proyek.destroy', ['id' => 'ID_PLACEHOLDER']));
+        const publikasiDestroyTemplate = @json(route('publikasi.destroy', ['id' => 'ID_PLACEHOLDER']));
+        const beritaDestroyTemplate = @json(route('berita.destroy', ['id' => 'ID_PLACEHOLDER']));
+        const studentDestroyTemplate = @json(route('student.destroy', ['id' => 'ID_PLACEHOLDER']));
+
+        const template = isPerangkatLunak
+            ? perangkatLunakDestroyTemplate
+            : (isPerkenalan
+                ? perkenalanDestroyTemplate
+                : (isStudent
+                    ? studentDestroyTemplate
+                    : (isProyek
+                        ? proyekDestroyTemplate
+                        : (isPublikasi
+                            ? publikasiDestroyTemplate
+                            : (isBerita ? beritaDestroyTemplate : publikasiDestroyTemplate)))));
+
+        deleteForm.action = template.replace('ID_PLACEHOLDER', id);
         deleteItemTitle.textContent = title;
         modal.classList.remove('hidden');
         document.body.classList.add('modal-open');

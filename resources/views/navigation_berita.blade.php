@@ -132,16 +132,16 @@
         <div class="mt-6 pt-6 border-t border-gray-200/50">
             <div class="grid grid-cols-3 gap-4 text-center">
                 <div class="group cursor-pointer">
-                    <div class="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-300">{{ $publikasis->total() ?? 0 }}</div>
-                    <div class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Total Publikasi</div>
+                    <div class="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-300">{{ $beritas->total() ?? 0 }}</div>
+                    <div class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Total Berita</div>
                 </div>
                 <div class="group cursor-pointer">
                     <div class="text-2xl font-bold text-emerald-600 group-hover:text-emerald-700 transition-colors duration-300">0</div>
-                    <div class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Proyek Aktif</div>
+                    <div class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Terpublikasi</div>
                 </div>
                 <div class="group cursor-pointer">
                     <div class="text-2xl font-bold text-purple-600 group-hover:text-purple-700 transition-colors duration-300">0</div>
-                    <div class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Software</div>
+                    <div class="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300">Draft</div>
                 </div>
             </div>
         </div>

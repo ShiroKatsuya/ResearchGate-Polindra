@@ -238,10 +238,13 @@
                         <div class="absolute inset-0 bg-primary-100 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200 origin-center"></div>
                     </a>
 
-                    <a href="{{ route('dashboard.index') }}" class="group relative px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-primary-700 transition-all duration-200 {{ request()->routeIs('dashboard.index') ? 'text-primary-700 bg-primary-50' : 'hover:bg-gray-50' }}">
-                      <span class="relative z-10">Login</span>
+                    <a href="{{ session('is_logged_in') ? route('logout') : route('dashboard.index') }}" 
+                       @if(session('is_logged_in')) onclick="event.preventDefault(); document.getElementById('logout-form').submit();" @endif
+                       class="group relative px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-primary-700 transition-all duration-200 {{ (session('is_logged_in') || request()->routeIs('dashboard.*')) ? 'text-primary-700 bg-primary-50' : 'hover:bg-gray-50' }}">
+                      <span class="relative z-10">{{ session('is_logged_in') ? 'Logout' : 'Login' }}</span>
                       <div class="absolute inset-0 bg-primary-100 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200 origin-center"></div>
                   </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
                 </div>
                 
                 <!-- Mobile menu button -->
@@ -260,7 +263,10 @@
                     <a href="{{ route('research.software') }}" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-all duration-200 {{ request()->routeIs('research.software') ? 'text-primary-700 bg-primary-50' : '' }}">Perangkat Lunak</a>
                     <a href="{{ route('introduce.index') }}" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-all duration-200 {{ request()->routeIs('introduce.index') ? 'text-primary-700 bg-primary-50' : '' }}">Perkenalan</a>
                     <a href="{{ route('news.index') }}" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-all duration-200 {{ request()->routeIs('news.*') ? 'text-primary-700 bg-primary-50' : '' }}">Berita</a>
-                    <a href="{{ route('dashboard.index') }}" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-all duration-200 {{ request()->routeIs('dashboard.index') ? 'text-primary-700 bg-primary-50' : '' }}">Login</a>
+                    <a href="{{ session('is_logged_in') ? route('logout') : route('dashboard.index') }}" 
+                       @if(session('is_logged_in')) onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();" @endif
+                       class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-all duration-200 {{ (session('is_logged_in') || request()->routeIs('dashboard.*')) ? 'text-primary-700 bg-primary-50' : '' }}">{{ session('is_logged_in') ? 'Logout' : 'Login' }}</a>
+                    <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
                 </div>
             </div>
         </div>
