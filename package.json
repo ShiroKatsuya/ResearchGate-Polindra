@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "preview": "vite preview",
+        "build:css": "vite build --mode css",
+        "build:js": "vite build --mode js",
+        "analyze": "vite build --mode analyze",
+        "lint": "eslint resources/js/**/*.js",
+        "lint:fix": "eslint resources/js/**/*.js --fix",
+        "format": "prettier --write resources/js/**/*.js resources/css/**/*.css",
+        "test": "vitest",
+        "test:ui": "vitest --ui",
+        "test:coverage": "vitest --coverage"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "@vitejs/plugin-vue": "^5.0.0",
+        "axios": "^1.11.0",
+        "concurrently": "^9.0.1",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.0",
+        "laravel-vite-plugin": "^2.0.0",
+        "prettier": "^3.2.0",
+        "tailwindcss": "^4.0.0",
+        "vite": "^7.0.4",
+        "vitest": "^2.0.0",
+        "@vitest/ui": "^2.0.0",
+        "@vitest/coverage-v8": "^2.0.0"
+    },
+    "dependencies": {
+        "alpinejs": "^3.13.0",
+        "@alpinejs/focus": "^3.13.0",
+        "chart.js": "^4.4.0"
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=9.0.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead",
+        "not ie 11"
+    ]
+}
