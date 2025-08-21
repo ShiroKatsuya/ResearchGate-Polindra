@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('repository_url')->nullable();
+            $table->string('website_url')->nullable();
             $table->foreignId('student_id')->nullable()->constrained('students')->nullOnDelete();
             $table->timestamps();
 

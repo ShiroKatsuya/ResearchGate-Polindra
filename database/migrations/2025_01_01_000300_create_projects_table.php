@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('repository_url')->nullable();
+            $table->string('website_url')->nullable();
             $table->enum('status', ['berjalan', 'selesai', 'tertunda'])->default('berjalan')->index();
             $table->date('start_date')->nullable()->index();
             $table->date('end_date')->nullable()->index();

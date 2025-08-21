@@ -210,10 +210,10 @@
                                 Mahasiswa
                             </th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Tanggal Mulai
+                                Repository
                             </th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Tanggal Selesai
+                                Website
                             </th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status
@@ -237,9 +237,7 @@
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-medium text-gray-900">{{ $proyek->title }}</div>
-                                        @if($proyek->repository_url)
-                                        <div class="text-sm text-gray-500 break-all">Repo: <a href="{{ $proyek->repository_url }}" target="_blank" class="text-blue-600 hover:underline">{{ $proyek->repository_url }}</a></div>
-                                        @endif
+                                        <div class="text-sm text-gray-500">{{ Str::limit($proyek->description, 50) }}</div>
                                     </div>
                                 </div>
                             </td>
@@ -248,14 +246,22 @@
                                     {{ $proyek->student ? $proyek->student->name : '-' }}
                                 </div>
                             </td>
-                            <td class="px-6 py-4 flex flex-col md:table-cell" data-label="Tanggal Mulai">
-                                <div class="text-sm text-gray-900">
-                                    {{ $proyek->start_date ? \Carbon\Carbon::parse($proyek->start_date)->format('d M Y') : '-' }}
+                            <td class="px-6 py-4 flex flex-col md:table-cell" data-label="Repository">
+                                <div class="text-sm text-gray-900 break-all">
+                                    @if($proyek->repository_url)
+                                        <a href="{{ $proyek->repository_url }}" target="_blank" class="text-blue-600 hover:underline">{{ Str::limit($proyek->repository_url, 30) }}</a>
+                                    @else
+                                        -
+                                    @endif
                                 </div>
                             </td>
-                            <td class="px-6 py-4 flex flex-col md:table-cell" data-label="Tanggal Selesai">
-                                <div class="text-sm text-gray-900">
-                                    {{ $proyek->end_date ? \Carbon\Carbon::parse($proyek->end_date)->format('d M Y') : '-' }}
+                            <td class="px-6 py-4 flex flex-col md:table-cell" data-label="Website">
+                                <div class="text-sm text-gray-900 break-all">
+                                    @if($proyek->website_url)
+                                        <a href="{{ $proyek->website_url }}" target="_blank" class="text-green-600 hover:underline">{{ Str::limit($proyek->website_url, 30) }}</a>
+                                    @else
+                                        -
+                                    @endif
                                 </div>
                             </td>
                             <td class="px-6 py-4 flex flex-col md:table-cell" data-label="Status">

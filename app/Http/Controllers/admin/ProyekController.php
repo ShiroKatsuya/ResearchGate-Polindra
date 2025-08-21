@@ -93,6 +93,7 @@ class ProyekController extends Controller
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'repository_url' => 'nullable|url|max:255',
+            'website_url' => 'nullable|url|max:255',
             'student_id' => 'nullable|exists:students,id',
         ]);
 
@@ -118,6 +119,7 @@ class ProyekController extends Controller
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'repository_url' => 'nullable|url|max:255',
+            'website_url' => 'nullable|url|max:255',
             'student_id' => 'nullable|exists:students,id',
         ]);
 

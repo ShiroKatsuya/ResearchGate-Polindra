@@ -225,7 +225,7 @@
                                 Repository
                             </a>
                             
-                            <button 
+                            {{-- <button 
                                 type="button" 
                                 class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 text-xs font-medium shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" 
                                 data-copy="{{ $project->repository_url }}" 
@@ -235,9 +235,38 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                 </svg>
                                 Salin URL
-                            </button>
+                            </button> --}}
                         </div>
-                    @endif
+                        @endif
+
+                        @if($project->website_url)
+                        <div class="flex items-center gap-2">
+                            <a 
+                                href="{{ $project->website_url }}" 
+                                target="_blank" 
+                                rel="noopener" 
+                                class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 text-xs font-medium shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" 
+                                data-tooltip="Kunjungi website aplikasi"
+                            >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
+                            </svg>
+                                Website
+                            </a>
+                            
+                            {{-- <button 
+                                type="button" 
+                                class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-green-600 to-green-700 text-white px-3 py-2 text-xs font-medium shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" 
+                                data-copy="{{ $project->website_url }}" 
+                                data-tooltip="Salin URL website"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                Salin URL
+                            </button> --}}
+                        </div>
+                        @endif
                         
                         <button 
                             type="button" 

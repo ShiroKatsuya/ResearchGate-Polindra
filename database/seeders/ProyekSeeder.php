@@ -29,6 +29,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(6)->toDateString(),
                 'end_date' => null,
                 'repository_url' => 'https://github.com/example/akademik',
+                'website_url' => 'https://akademik.example.com',
                 'student_id' => $students[0]->id,
             ],
             [
@@ -38,6 +39,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(12)->toDateString(),
                 'end_date' => now()->subMonths(2)->toDateString(),
                 'repository_url' => 'https://github.com/example/monitoring-kesehatan',
+                'website_url' => 'https://health-monitor.example.com',
                 'student_id' => $students[1]->id,
             ],
             [
@@ -47,6 +49,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(3)->toDateString(),
                 'end_date' => null,
                 'repository_url' => null,
+                'website_url' => null,
                 'student_id' => $students[2]->id,
             ],
             [
@@ -56,6 +59,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(2)->toDateString(),
                 'end_date' => null,
                 'repository_url' => 'https://github.com/example/rekomendasi-buku',
+                'website_url' => 'https://book-recommender.example.com',
                 'student_id' => $students[0]->id,
             ],
             [
@@ -65,6 +69,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(4)->toDateString(),
                 'end_date' => null,
                 'repository_url' => 'https://github.com/example/absensi-qr',
+                'website_url' => 'https://qr-attendance.example.com',
                 'student_id' => $students[1]->id,
             ],
             [
@@ -74,6 +79,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(10)->toDateString(),
                 'end_date' => now()->subMonths(1)->toDateString(),
                 'repository_url' => 'https://github.com/example/penjadwalan-kuliah',
+                'website_url' => 'https://schedule.example.com',
                 'student_id' => $students[2]->id,
             ],
             [
@@ -83,6 +89,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(1)->toDateString(),
                 'end_date' => null,
                 'repository_url' => 'https://github.com/example/pengingat-tugas',
+                'website_url' => 'https://task-reminder.example.com',
                 'student_id' => $students[0]->id,
             ],
             [
@@ -92,43 +99,28 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(5)->toDateString(),
                 'end_date' => null,
                 'repository_url' => null,
+                'website_url' => null,
                 'student_id' => $students[1]->id,
             ],
             [
                 'title' => 'Sistem Inventaris Lab',
-                'description' => 'Aplikasi manajemen inventaris laboratorium kampus.',
+                'description' => 'Aplikasi untuk mengelola inventaris laboratorium komputer.',
                 'status' => 'selesai',
                 'start_date' => now()->subMonths(8)->toDateString(),
-                'end_date' => now()->subMonths(2)->toDateString(),
+                'end_date' => now()->subMonths(3)->toDateString(),
                 'repository_url' => 'https://github.com/example/inventaris-lab',
+                'website_url' => 'https://lab-inventory.example.com',
                 'student_id' => $students[2]->id,
             ],
             [
-                'title' => 'Aplikasi Peminjaman Buku',
-                'description' => 'Aplikasi untuk peminjaman dan pengembalian buku perpustakaan.',
+                'title' => 'Aplikasi Pengelolaan Perpustakaan',
+                'description' => 'Sistem manajemen perpustakaan digital.',
                 'status' => 'berjalan',
                 'start_date' => now()->subMonths(7)->toDateString(),
                 'end_date' => null,
-                'repository_url' => 'https://github.com/example/peminjaman-buku',
+                'repository_url' => 'https://github.com/example/perpustakaan',
+                'website_url' => 'https://library.example.com',
                 'student_id' => $students[0]->id,
-            ],
-            [
-                'title' => 'Sistem Penilaian Otomatis',
-                'description' => 'Sistem untuk penilaian otomatis ujian berbasis web.',
-                'status' => 'selesai',
-                'start_date' => now()->subMonths(15)->toDateString(),
-                'end_date' => now()->subMonths(3)->toDateString(),
-                'repository_url' => 'https://github.com/example/penilaian-otomatis',
-                'student_id' => $students[1]->id,
-            ],
-            [
-                'title' => 'Aplikasi Konsultasi Dosen',
-                'description' => 'Platform konsultasi online antara mahasiswa dan dosen.',
-                'status' => 'berjalan',
-                'start_date' => now()->subMonths(6)->toDateString(),
-                'end_date' => null,
-                'repository_url' => 'https://github.com/example/konsultasi-dosen',
-                'student_id' => $students[2]->id,
             ],
             [
                 'title' => 'Sistem Pengelolaan UKM',
@@ -137,6 +129,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(9)->toDateString(),
                 'end_date' => null,
                 'repository_url' => null,
+                'website_url' => null,
                 'student_id' => $students[0]->id,
             ],
             [
@@ -146,6 +139,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(3)->toDateString(),
                 'end_date' => null,
                 'repository_url' => 'https://github.com/example/pengajuan-beasiswa',
+                'website_url' => 'https://scholarship.example.com',
                 'student_id' => $students[1]->id,
             ],
             [
@@ -155,6 +149,7 @@ class ProyekSeeder extends Seeder
                 'start_date' => now()->subMonths(11)->toDateString(),
                 'end_date' => now()->subMonths(1)->toDateString(),
                 'repository_url' => 'https://github.com/example/event-kampus',
+                'website_url' => 'https://campus-events.example.com',
                 'student_id' => $students[2]->id,
             ],
         ];

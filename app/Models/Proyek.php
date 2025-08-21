@@ -16,6 +16,7 @@ class Proyek extends Model
         'start_date',
         'end_date',
         'repository_url',
+        'website_url',
         'student_id',
     ];
 

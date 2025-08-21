@@ -121,6 +121,22 @@
                     @enderror
                 </div>
 
+                <!-- Website URL Field -->
+                <div>
+                    <label for="website_url" class="block text-sm font-medium text-gray-700 mb-2">
+                        URL Website
+                    </label>
+                    <input type="url" 
+                           id="website_url" 
+                           name="website_url" 
+                           value="{{ old('website_url', $proyek->website_url) }}"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 @error('website_url') border-red-500 @enderror"
+                           placeholder="https://example.com">
+                    @error('website_url')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Student Field -->
                 <div>
                     <label for="student_id" class="block text-sm font-medium text-gray-700 mb-2">
