@@ -305,13 +305,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                 <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                  
+                    <div class="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:text-left">
                         <div>
                             <span class="block font-semibold text-gray-900 text-xs sm:text-sm leading-tight">Jl. Raya Lohbener Lama No.08, Legok, Kec. Lohbener, Kabupaten Indramayu, Jawa Barat 45252</span>
                             {{-- <span class="block text-xs text-primary-600 mt-1">Kampus Jurusan Teknik Informatika</span> --}}
                             <p class="text-xs text-gray-400 mt-2 border-t border-gray-100 pt-2">© {{ date('Y') }} <span class="font-medium text-primary-700">Jurusan Teknik Informatika</span></p>
-                          </div>
+                        </div>
                     </div>
                   
                 </div>
@@ -325,12 +324,12 @@
                     </div>
                 </div>
                 
-                <div class="text-right">
-                    <button @click="$dispatch('open-modal', 'about-modal')" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-3  font-medium shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                <div class="text-center md:text-right">
+                    <button @click="$dispatch('open-modal', 'about-modal')" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-3 font-medium shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                       <span class="font-bold text-gray-900"> Tentang Portal</span>
+                        <span class="font-bold text-gray-900"> Tentang Portal</span>
                     </button>
                 </div>
             </div>

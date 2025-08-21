@@ -16,7 +16,7 @@
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-gray-900 antialiased font-sans selection:bg-primary/20 selection:text-primary-800 smooth-scroll">
   <section class="max-w-4xl w-full mx-auto py-12">
-    <div class="grid w-full gap-8 items-center lg:grid-cols-2">
+    <div class="grid w-full gap-8 items-center grid-cols-1 lg:grid-cols-2">
       <div x-data="loginForm()" x-init="init()" :class="shake ? 'shake' : ''" class="bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100 transform transition-all duration-300 hover:scale-[1.005]">
         <div x-show="loading" x-cloak class="loading-bar" aria-hidden="true"></div>
         <!-- Header / Logo -->
@@ -43,9 +43,9 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" /></svg>
                   <span class="sr-only">Info formulir</span>
                 </button>
-                <div x-show="showTooltip" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute z-10 top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-xs bg-white text-xs text-gray-700 p-3 rounded-md shadow-lg border border-gray-100" role="tooltip" id="info-login">
+                {{-- <div x-show="showTooltip" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute z-10 top-full mt-2 left-1/2 -translate-x-1/2 w-max max-w-xs bg-white text-xs text-gray-700 p-3 rounded-md shadow-lg border border-gray-100" role="tooltip" id="info-login">
                   Masukkan email atau username dan kata sandi. Ini hanya demo UI — tidak melakukan panggilan backend.
-                </div>
+                </div> --}}
               </div>
             </div>
 
@@ -160,15 +160,15 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             </div>
-            <p class="mt-2 text-sm text-gray-500">Masukkan email Anda untuk menerima instruksi pemulihan (demo saja).</p>
-            <div class="mt-4">
+            <p class="mt-2 text-sm text-gray-500">Hubungi Administrator Untuk Melakukan Reset Password</p>
+            {{-- <div class="mt-4">
               <label for="fp-email" class="block text-sm font-medium text-gray-700">Email</label>
               <input id="fp-email" type="email" class="mt-1 w-full px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200" placeholder="email@contoh.com">
             </div>
             <div class="mt-5 flex justify-end gap-3">
               <button @click="forgotOpen=false" class="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">Batal</button>
               <button @click="consoleLog('Kirim instruksi lupa')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Kirim</button>
-            </div>
+            </div> --}}
           </div>
         </div>
 
@@ -179,29 +179,30 @@
           </div>
         </div>
       </div>
-      <div class="hidden lg:block">
-        <div class="relative isolate overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-indigo-50 via-violet-50 to-sky-50 p-10 shadow-sm">
+      {{-- information --}}
+      <div class="block">
+        <div class="relative isolate overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-indigo-50 via-violet-50 to-sky-50 p-6 lg:p-10 shadow-sm">
           <div class="absolute -left-10 -top-10 h-56 w-56 rounded-full bg-indigo-300/20 blur-3xl"></div>
           <div class="absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-sky-300/20 blur-3xl"></div>
           <div class="relative">
-            <h2 class="mb-3 text-2xl font-semibold tracking-tight text-slate-800">Selamat datang kembali 👋</h2>
-            <p class="max-w-md text-slate-600">Masuk untuk melanjutkan eksplorasi riset, proyek, dan publikasi terbaru.</p>
-            <ul class="mt-6 space-y-2 text-sm text-slate-600">
-              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Login dengan akun yang sudah terdaftar.</span></li>
-              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Validasi input dengan pesan error yang jelas.</span></li>
+            <h2 class="mb-3 text-xl lg:text-2xl font-semibold tracking-tight text-slate-800">Selamat datang kembali 👋</h2>
+            <p class="max-w-md text-sm lg:text-base text-slate-600">Masuk untuk melanjutkan eksplorasi riset, proyek, dan publikasi terbaru.</p>
+            <ul class="mt-4 lg:mt-6 space-y-2 text-xs lg:text-sm text-slate-600">
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 lg:h-5 lg:w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Login dengan akun yang sudah terdaftar.</span></li>
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 lg:h-5 lg:w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Validasi input dengan pesan error yang jelas.</span></li>
             </ul>
             
             <!-- Demo Credentials -->
-            <div class="mt-8 p-4 bg-white/50 rounded-xl border border-slate-200">
-              <h3 class="text-sm font-semibold text-slate-800 mb-3">Akun Demo Tersedia:</h3>
-              <div class="space-y-2 text-xs">
-                <div class="flex items-center gap-2">
+            <div class="mt-6 lg:mt-8 p-3 lg:p-4 bg-white/50 rounded-xl border border-slate-200">
+              <h3 class="text-xs lg:text-sm font-semibold text-slate-800 mb-2 lg:mb-3">Akun Demo Tersedia:</h3>
+              <div class="space-y-1 lg:space-y-2 text-xs">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                   <span class="font-medium text-slate-700">User 1:</span>
-                  <span class="text-slate-600">rizky_sulaeman@gmail.com / 12345678</span>
+                  <span class="text-slate-600 text-xs">rizky_sulaeman@gmail.com / 12345678</span>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                   <span class="font-medium text-slate-700">User 2:</span>
-                  <span class="text-slate-600">testuser@gmail.com / testpass@123</span>
+                  <span class="text-slate-600 text-xs">testuser@gmail.com / testpass@123</span>
                 </div>
               </div>
             </div>
