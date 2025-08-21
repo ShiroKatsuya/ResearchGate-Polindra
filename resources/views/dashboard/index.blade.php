@@ -185,10 +185,10 @@
           <div class="absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-sky-300/20 blur-3xl"></div>
           <div class="relative">
             <h2 class="mb-3 text-2xl font-semibold tracking-tight text-slate-800">Selamat datang kembali 👋</h2>
-            <p class="max-w-md text-slate-600">Masuk untuk melanjutkan eksplorasi riset, proyek, dan publikasi terbaru. Keamanan akun Anda adalah prioritas kami.</p>
+            <p class="max-w-md text-slate-600">Masuk untuk melanjutkan eksplorasi riset, proyek, dan publikasi terbaru.</p>
             <ul class="mt-6 space-y-2 text-sm text-slate-600">
               <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Login dengan akun yang sudah terdaftar.</span></li>
-              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Validasi input real-time dengan pesan error yang jelas.</span></li>
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Validasi input dengan pesan error yang jelas.</span></li>
             </ul>
             
             <!-- Demo Credentials -->
