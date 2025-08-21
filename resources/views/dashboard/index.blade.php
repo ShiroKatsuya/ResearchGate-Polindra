@@ -71,8 +71,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" /></svg>
                     Tips
                   </button>
-                  <div x-show="passwordTip" x-cloak x-transition class="absolute right-0 mt-2 w-64 text-xs bg-white border border-gray-200 rounded-md shadow-lg p-3 text-gray-600" role="tooltip" id="password-tip">
-                    Gunakan minimal 8 karakter dengan kombinasi huruf besar, huruf kecil, angka, dan simbol.
+                  <div x-show="passwordTip" x-cloak x-transition class="absolute right-0 mt-12 w-64 text-xs bg-white border border-gray-200 rounded-md shadow-lg p-3 text-gray-600" role="tooltip" id="password-tip">
+                    Tetap jaga kerahasiaan akun Anda.
                   </div>
                 </div>
               </div>
@@ -140,7 +140,8 @@
             </div>
 
             <!-- Register link -->
-            <p class="text-center text-sm text-gray-500">Belum punya akun? <a href="#" class="text-indigo-600 hover:underline font-medium" @click.prevent="goRegister()">Daftar</a></p>
+            {{-- <p class="text-center text-sm text-gray-500">Belum punya akun? <a href="#" class="text-indigo-600 hover:underline font-medium" @click.prevent="goRegister()">Daftar</a></p> --}}
+            <p class="text-center text-sm text-gray-500">Belum punya akun? <a href="#" class="text-indigo-600 hover:underline font-medium">Daftar</a></p>
           </form>
         </div>
 
@@ -172,9 +173,9 @@
         </div>
 
         <!-- Toast -->
-        <div aria-live="polite" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 z-50">
-          <div class="w-full flex flex-col items-center sm:items-end space-y-4">
-            <div x-show="toast.show" x-cloak x-transition:enter="transform ease-out duration-300 transition" x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-text="toast.message" class="pointer-events-auto max-w-sm w-full bg-white shadow-lg rounded-lg border border-gray-100 px-4 py-3 text-sm text-gray-800"></div>
+        <div aria-live="polite" class="fixed inset-0 flex items-start px-4 py-6 pointer-events-none sm:p-6 z-50">
+          <div class="w-full flex flex-col items-center sm:items-start space-y-4">
+            <div x-show="toast.show" x-cloak x-transition:enter="transform ease-out duration-300 transition" x-transition:enter-start="translate-y-[-2rem] opacity-0 sm:translate-y-0 sm:translate-x-2" x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-text="toast.message" class="pointer-events-auto max-w-sm w-full bg-white shadow-lg rounded-lg border border-gray-100 px-4 py-3 text-sm text-gray-800"></div>
           </div>
         </div>
       </div>
@@ -186,9 +187,24 @@
             <h2 class="mb-3 text-2xl font-semibold tracking-tight text-slate-800">Selamat datang kembali 👋</h2>
             <p class="max-w-md text-slate-600">Masuk untuk melanjutkan eksplorasi riset, proyek, dan publikasi terbaru. Keamanan akun Anda adalah prioritas kami.</p>
             <ul class="mt-6 space-y-2 text-sm text-slate-600">
-              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Autentikasi hanya simulasi di halaman ini (tanpa backend).</span></li>
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Login dengan akun yang sudah terdaftar.</span></li>
               <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Validasi input real-time dengan pesan error yang jelas.</span></li>
             </ul>
+            
+            <!-- Demo Credentials -->
+            <div class="mt-8 p-4 bg-white/50 rounded-xl border border-slate-200">
+              <h3 class="text-sm font-semibold text-slate-800 mb-3">Akun Demo Tersedia:</h3>
+              <div class="space-y-2 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="font-medium text-slate-700">User 1:</span>
+                  <span class="text-slate-600">rizky_sulaeman@gmail.com / 12345678</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="font-medium text-slate-700">User 2:</span>
+                  <span class="text-slate-600">testuser@gmail.com / testpass@123</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -264,7 +280,7 @@
         }
       },
 
-      submit(){
+      async submit(){
         // basic frontend validation + states
         if(!this.validate()){
           this.showToast('Periksa kembali data yang dimasukkan.');
@@ -272,14 +288,35 @@
           return;
         }
         this.loading = true;
-        // mock loading
-        setTimeout(()=>{
-          this.loading = false;
-          this.showToast('Berhasil masuk (demo).');
-          console.log('Login data:', JSON.parse(JSON.stringify(this.form)));
-          window.location.href = "{{ route('dashboard.content') }}";
+        
+        try {
+          const response = await fetch("{{ route('login.submit') }}", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify(this.form)
+          });
           
-        }, 1200);
+          const data = await response.json();
+          
+          if (data.success) {
+            this.showToast(data.message);
+            setTimeout(() => {
+              window.location.href = data.redirect;
+            }, 1000);
+          } else {
+            this.showToast(data.message);
+            this.shake = true; 
+            setTimeout(()=>{ this.shake = false }, 450);
+          }
+        } catch (error) {
+          this.showToast('Terjadi kesalahan. Silakan coba lagi.');
+          console.error('Login error:', error);
+        } finally {
+          this.loading = false;
+        }
       },
 
       social(provider){
@@ -309,18 +346,32 @@
         const hasUpper = /[A-Z]/.test(value);
         const hasNumber = /[0-9]/.test(value);
         const hasSymbol = /[^A-Za-z0-9]/.test(value);
-        const longEnough = value.length >= 8;
+        
         let score = 0;
+        
+        // Base score for any password
         if (value.length > 0) score = 1;
-        if (longEnough && (hasLower || hasUpper)) score = 2;
-        if (longEnough && hasLower && hasUpper && hasNumber) score = 3;
-        if (longEnough && hasLower && hasUpper && hasNumber && hasSymbol) score = 4;
+        
+        // Improved scoring system
+        if (value.length >= 6) {
+          let criteria = 0;
+          if (hasLower) criteria++;
+          if (hasUpper) criteria++;
+          if (hasNumber) criteria++;
+          if (hasSymbol) criteria++;
+          
+          // Score based on criteria met
+          if (criteria >= 1 && value.length >= 6) score = 2;
+          if (criteria >= 2 && value.length >= 6) score = 3;
+          if (criteria >= 3 && value.length >= 8) score = 4;
+        }
+        
         const map = {
           0: { label: 'Kosong', color: 'bg-red-500', suggestions: '' },
-          1: { label: 'Sangat Lemah', color: 'bg-red-500', suggestions: 'Tambahkan lebih banyak karakter.' },
-          2: { label: 'Lemah', color: 'bg-amber-500', suggestions: 'Gunakan huruf besar/kecil & angka.' },
-          3: { label: 'Baik', color: 'bg-emerald-500', suggestions: 'Tambahkan simbol untuk lebih kuat.' },
-          4: { label: 'Kuat', color: 'bg-emerald-600', suggestions: '' }
+          1: { label: 'Kata Sandi Sangat Lemah', color: 'bg-red-500', suggestions: 'Rubah kata sandi Anda Dengan Kata Sandi yang lebih kuat.' },
+          2: { label: 'Kata Sandi Lemah', color: 'bg-amber-500', suggestions: 'Disarankan untuk mengganti kata sandi Anda.' },
+          3: { label: 'Kata Sandi Baik', color: 'bg-emerald-500', suggestions: 'Kata sandi Anda sudah cukup kuat.' },
+          4: { label: 'Kata Sandi Kuat', color: 'bg-emerald-600', suggestions: 'Kata sandi Anda sudah sangat kuat.' }
         };
         this.passwordStrength = { score, ...(map[score] || map[0]) };
       },

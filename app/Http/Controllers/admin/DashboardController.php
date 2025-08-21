@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class DashboardController extends Controller
 {
@@ -13,8 +15,6 @@ class DashboardController extends Controller
     }
     public function content()
     {
-        // Mark as logged-in for demo navigation state
-        session(['is_logged_in' => true]);
         return view('dashboard.content');
     }
 }

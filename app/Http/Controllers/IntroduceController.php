@@ -10,7 +10,7 @@ class IntroduceController extends Controller
 {
     public function index(Request $request)
     {
-        $year = $request->integer('year');
+        $year = $request->get('year') ? (int) $request->get('year') : null;
         $studentsQuery = Perkenalan::query()
             ->when($request->string('q')->toString(), function ($q, $term) {
                 $q->where('name', 'like', "%{$term}%")

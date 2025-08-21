@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             PublikasiSeeder::class,
             BeritaSeeder::class,
             PerkenalanSeeder::class,
+            UserSeeder::class,
             
         ]);
     }
