@@ -200,6 +200,29 @@ return [
     */
 
     'same_site' => env('SESSION_SAME_SITE', 'lax'),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Domain for Tunnel Access
+    |--------------------------------------------------------------------------
+    |
+    | When accessing through tunnels like Cloudflare, we need to be more
+    | flexible with cookie domains and security settings.
+    |
+    */
+    
+    'domain' => env('SESSION_DOMAIN', null),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | HTTPS Only Cookies for Tunnel
+    |--------------------------------------------------------------------------
+    |
+    | Set to false when using tunnels to allow HTTP cookies
+    |
+    */
+    
+    'secure' => env('SESSION_SECURE_COOKIE', false),
 
     /*
     |--------------------------------------------------------------------------

@@ -362,7 +362,7 @@
 <!-- Delete Confirmation Modal -->
 <div id="deleteModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="closeDeleteModal()"></div>
+        <div class="fixed inset-0  transition-opacity" onclick="closeDeleteModal()"></div>
         <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl ring-1 ring-gray-900/5 w-full sm:max-w-lg transition-all duration-300 scale-95 opacity-0" id="modalContent">
             <div class="bg-gradient-to-r from-red-600 to-red-700 px-6 py-6 text-white">
                 <div class="flex items-center gap-3">

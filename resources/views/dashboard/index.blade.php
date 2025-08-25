@@ -35,6 +35,8 @@
         <!-- Form -->
         <div class="px-6 pb-6 sm:pb-8 pt-6">
           <form @submit.prevent="submit()" @keydown.enter="submit()" class="space-y-5" :aria-busy="loading.toString()">
+            <!-- Hidden CSRF token as backup -->
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <!-- Info / tooltip -->
             <div class="flex items-center justify-between">
               <label class="text-sm font-semibold text-gray-800">Masuk</label>
@@ -291,14 +293,46 @@
         this.loading = true;
         
         try {
-          const response = await fetch("{{ route('login.submit') }}", {
+          // Get CSRF token with fallback
+          let csrfToken = '';
+          const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+          if (csrfMeta) {
+            csrfToken = csrfMeta.getAttribute('content');
+          }
+          
+          // Fallback to hidden input if meta tag is not available
+          if (!csrfToken) {
+            const hiddenToken = document.querySelector('input[name="_token"]');
+            if (hiddenToken) {
+              csrfToken = hiddenToken.value;
+            }
+          }
+          
+          // Prepare headers
+          const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          };
+          
+          // Add CSRF token if available
+          if (csrfToken) {
+            headers['X-CSRF-TOKEN'] = csrfToken;
+          }
+          
+          // Use relative URL to avoid domain issues with tunnel
+          const loginUrl = "{{ route('login.submit') }}";
+          const url = loginUrl.startsWith('http') ? loginUrl : window.location.origin + loginUrl;
+          
+          const response = await fetch(url, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify(this.form)
+            headers: headers,
+            body: JSON.stringify(this.form),
+            credentials: 'same-origin'
           });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
           
           const data = await response.json();
           
@@ -313,8 +347,21 @@
             setTimeout(()=>{ this.shake = false }, 450);
           }
         } catch (error) {
-          this.showToast('Terjadi kesalahan. Silakan coba lagi.');
           console.error('Login error:', error);
+          
+          // More specific error handling
+          if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+            this.showToast('Koneksi gagal. Periksa koneksi internet Anda atau coba refresh halaman.');
+          } else if (error.message.includes('HTTP error! status: 419')) {
+            this.showToast('Sesi telah berakhir. Silakan refresh halaman dan coba lagi.');
+          } else if (error.message.includes('HTTP error! status: 422')) {
+            this.showToast('Data yang dimasukkan tidak valid. Periksa kembali.');
+          } else {
+            this.showToast('Terjadi kesalahan. Silakan coba lagi.');
+          }
+          
+          this.shake = true; 
+          setTimeout(()=>{ this.shake = false }, 450);
         } finally {
           this.loading = false;
         }

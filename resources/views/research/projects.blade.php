@@ -16,8 +16,8 @@
                         </svg>
                     </div>
                     <div class="text-left">
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">Proyek Mahasiswa</h1>
-                        {{-- <p class="text-green-100 text-lg sm:text-xl">Karya inovatif dan penelitian mahasiswa Polindra</p> --}}
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">Proyek Penelitian Mahasiswa</h1>
+                        <p class="text-green-100 text-lg sm:text-xl">Proyek hasil penelitian mahasiswa Polindra</p>
                     </div>
                 </div>
                 

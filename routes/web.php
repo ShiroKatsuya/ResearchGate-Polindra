@@ -17,6 +17,16 @@ require_once 'student.php';
 
 Route::get('/', fn() => view('home', ['title' => 'Gerbang Riset Mahasiswa Politeknik Negeri Indramayu']))->name('home');
 
+// Health check for tunnel testing
+Route::get('/health', function() {
+    return response()->json([
+        'status' => 'ok',
+        'message' => 'Server is running',
+        'timestamp' => now(),
+        'csrf_token' => csrf_token()
+    ]);
+})->name('health');
+
 
 // Research
 Route::get('/riset/publikasi', [ResearchController::class, 'publications'])->name('research.publications');
