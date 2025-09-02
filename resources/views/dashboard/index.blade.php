@@ -196,15 +196,19 @@
             
             <!-- Demo Credentials -->
             <div class="mt-6 lg:mt-8 p-3 lg:p-4 bg-white/50 rounded-xl border border-slate-200">
-              <h3 class="text-xs lg:text-sm font-semibold text-slate-800 mb-2 lg:mb-3">Akun Demo Tersedia:</h3>
+              <h3 class="text-xs lg:text-sm font-semibold text-slate-800 mb-2 lg:mb-3">Akun Telah Tersedia:</h3>
               <div class="space-y-1 lg:space-y-2 text-xs">
-                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                {{-- <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                   <span class="font-medium text-slate-700">User 1:</span>
                   <span class="text-slate-600 text-xs">rizky_sulaeman@gmail.com / 12345678</span>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                   <span class="font-medium text-slate-700">User 2:</span>
                   <span class="text-slate-600 text-xs">testuser@gmail.com / testpass@123</span>
+                </div> --}}
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                  <span class="font-medium text-slate-700">Contact Administrator</span>
+                  {{-- <span class="text-slate-600 text-xs">+62 815-8669-1068</span> --}}
                 </div>
               </div>
             </div>
